@@ -50,7 +50,7 @@ make install-deps
   ```
 
 ### :small_blue_diamond: Деплой
-- Общей командой:
+- Одной общей командой:
 ```bash
 make deploy
 ```
@@ -61,5 +61,8 @@ make prepare
 
 # Развертывание Docker-контейнера Redmine на ВМ
 make redmine
+
+# Установка агента DataDog и настройка HTTP Check
+make datadog
 ```
 #### :link: [Ссылка](https://allegrohub.ru) на задеплоенное приложение

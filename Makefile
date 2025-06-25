@@ -1,4 +1,4 @@
-.PHONY: install-deps deploy prepare redmine edit-secret
+.PHONY: install-deps deploy prepare redmine datadog edit-secret
 
 install-deps:
 	ansible-galaxy install -r requirements.yml
@@ -11,6 +11,9 @@ prepare:
 
 redmine:
 	ansible-playbook -i inventory.ini playbook.yml --vault-password-file .vault-password --tags redmine
+
+datadog:
+	ansible-playbook -i inventory.ini playbook.yml --vault-password-file .vault-password --tags datadog
 
 edit-secret:
 	ansible-vault edit group_vars/secrets.yml --vault-password-file .vault-password

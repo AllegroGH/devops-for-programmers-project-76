@@ -10,3 +10,6 @@ db_name: "{{ vault_db_name }}"
 db_port: "{{ vault_db_port }}"
 db_user: "{{ vault_db_user }}"
 db_password: "{{ vault_db_password }}"
+
+datadog_api_key: " {{vault_datadog_api_key}} "
+datadog_site: "datadoghq.eu"
