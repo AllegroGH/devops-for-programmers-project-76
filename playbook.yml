@@ -1,15 +1,11 @@
 - name: Prepare servers for deployment
   hosts: all
-  vars_files:
-    - group_vars/webservers.yml
-    - group_vars/secrets.yml
-
   become: true
 
   tasks:
     - name: Update apt cache
       ansible.builtin.apt:
-        update_cache: yes
+        update_cache: true
       tags: setup
 
     - name: Install pip via Galaxy role
@@ -38,13 +34,10 @@
 - name: Deploy Redmine
   hosts: all
   become: true
-  vars_files:
-    - group_vars/webservers.yml
-    - group_vars/secrets.yml
 
   tasks:
     - name: Ensure Redmine directory exists
-      file:
+      ansible.builtin.file:
         path: "/opt/redmine"
         state: directory
         mode: '0755'
@@ -61,7 +54,7 @@
       community.docker.docker_image:
         name: redmine:latest
         source: pull
-        force_source: yes
+        force_source: true
       tags: redmine
 
     - name: Run Redmine container
@@ -81,13 +74,10 @@
 - name: Install DataDog
   hosts: webservers
   become: true
-  vars_files:
-    - group_vars/webservers.yml
-    - group_vars/secrets.yml
 
   tasks:
     - name: Import the Datadog Agent role from the Datadog collection
-      import_role:
+      ansible.builtin.import_role:
         name: datadog.dd.agent
       tags: datadog
 
@@ -105,5 +95,5 @@
       ansible.builtin.service:
         name: datadog-agent
         state: restarted
-        enabled: yes
+        enabled: true
       tags: datadog

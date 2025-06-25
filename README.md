@@ -2,7 +2,7 @@
 [![Actions Status](https://github.com/AllegroGH/devops-for-programmers-project-76/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/AllegroGH/devops-for-programmers-project-76/actions)
 
 ### :small_blue_diamond: Краткое описание
-Автоматизированное развертывание Docker-контейнера Redmine на кластере виртуальных машин в Yandex Cloud с использованием Ansible.
+Автоматизированное развертывание Docker-контейнера Redmine на кластере виртуальных машин в Yandex Cloud с использованием Ansible. Для мониторинга состояния серверов с приложением используется агент DataDog.
 
 **Ключевые компоненты:**
 - 2 виртуальные машины Compute Cloud (Ubuntu 22.04 LTS)
@@ -33,12 +33,12 @@ make install-deps
    ```bash
    cp inventory.ini.template inventory.ini
    ```
-- Заполните `inventory.ini` реальными данными</br>
+- Заполните `inventory.ini` реальными данными (IPs, usernames, paths to keys)</br>
 
 - Создайте зашифрованный файл `secrets.yml` и заполните его реальными данными</br>
-(используйте переменные из шаблона `group_vars/secrets.yml.template`):
+(используйте переменные из шаблона `group_vars/webservers/secrets.yml.template`):
   ```bash
-  ansible-vault create group_vars/secrets.yml
+  ansible-vault create group_vars/webservers/secrets.yml
   ```
 - Использованный пароль запишите в файл `.vault-password`:
   ```bash
