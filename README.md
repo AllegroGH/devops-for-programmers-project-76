@@ -33,25 +33,33 @@ make install-deps
    ```bash
    cp inventory.ini.template inventory.ini
    ```
-- Заполните `inventory.ini` реальными данными
-</br>
-- Создайте зашифрованный файл `secrets.yml` и заполните его реальными данными
+- Заполните `inventory.ini` реальными данными</br>
+
+- Создайте зашифрованный файл `secrets.yml` и заполните его реальными данными</br>
 (используйте переменные из шаблона `group_vars/secrets.yml.template`):
   ```bash
   ansible-vault create group_vars/secrets.yml
   ```
 - Использованный пароль запишите в файл `.vault-password`:
   ```bash
-   echo "your_vault_password" >> .vault-password
+  echo "your_vault_password" >> .vault-password
+  ```
+- :information_source: Для редактированя `secrets.yml` можно использовать короткую команду:
+  ```bash
+  make edit-secret
   ```
 
 ### :small_blue_diamond: Деплой
+- Общей командой:
+```bash
+make deploy
+```
+- Отдельными командами:
 ```bash
 # Установка зависимостей на ВМ
 make prepare
 
 # Развертывание Docker-контейнера Redmine на ВМ
-make deploy
+make redmine
 ```
-
 #### :link: [Ссылка](https://allegrohub.ru) на задеплоенное приложение
