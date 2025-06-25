@@ -45,7 +45,13 @@ make install-deps
    echo "your_vault_password" >> .vault-password
   ```
 
-### :small_blue_diamond: Подготовка серверов к деплою:
+### :small_blue_diamond: Деплой
 ```bash
+# Установка зависимостей на ВМ
 make prepare
+
+# Развертывание Docker-контейнера Redmine на ВМ
+make deploy
 ```
+
+#### :link: [Ссылка](https://allegrohub.ru) на задеплоенное приложение

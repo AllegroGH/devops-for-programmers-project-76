@@ -1,0 +1,42 @@
+- name: Deploy Redmine
+  hosts: all
+  become: true
+  vars_files:
+    - group_vars/webservers.yml
+    - group_vars/secrets.yml    
+
+  tasks:
+    - name: Ensure Redmine directory exists
+      file:
+        path: "/opt/redmine"
+        state: directory
+        mode: '0755'
+      tags: deploy
+
+    - name: Create .env file from template
+      ansible.builtin.template:
+        src: templates/redmine.env.j2
+        dest: "/opt/redmine/.env"
+        mode: '0640'
+      tags: deploy
+
+    - name: Pull redmine Docker image
+      community.docker.docker_image:
+        name: redmine:latest
+        source: pull
+        force_source: yes
+      tags: deploy
+
+    - name: Run Redmine container
+      community.docker.docker_container:
+        name: redmine
+        image: redmine:latest
+        restart_policy: unless-stopped
+        ports:
+          - "{{ redmine_port }}:3000"
+        env_file: "/opt/redmine/.env"
+        volumes:
+          - "/opt/redmine/files:/usr/src/redmine/files"
+        state: started
+        detach: true
+      tags: deploy

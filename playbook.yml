@@ -1,5 +1,9 @@
 - name: Prepare servers for deployment
   hosts: all
+  vars_files:
+    - group_vars/webservers.yml
+    - group_vars/secrets.yml
+
   become: true
 
   tasks:

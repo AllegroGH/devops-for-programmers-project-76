@@ -1,6 +1,10 @@
 pip_install_packages:
   - name: docker
 
+ansible_python_interpreter: /usr/bin/python3
+
+redmine_port: 3000
+
 db_host: "{{ vault_db_host }}"
 db_name: "{{ vault_db_name }}"
 db_port: "{{ vault_db_port }}"
