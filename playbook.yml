@@ -1,0 +1,33 @@
+- name: Prepare servers for deployment
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+      tags: setup
+
+    - name: Install pip via Galaxy role
+      ansible.builtin.import_role:
+        name: geerlingguy.pip
+      tags: setup
+
+    - name: Install docker pip module
+      ansible.builtin.pip:
+        name: docker
+        state: present
+      tags: setup
+
+    - name: Install Docker via Galaxy role
+      ansible.builtin.import_role:
+        name: geerlingguy.docker
+      tags: setup
+
+    - name: Verify Docker installation
+      ansible.builtin.command: docker --version
+      register: docker_check
+      failed_when: docker_check.rc != 0
+      changed_when: false
+      tags: setup
+        

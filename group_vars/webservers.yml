@@ -1,0 +1,8 @@
+pip_install_packages:
+  - name: docker
+
+db_host: "{{ vault_db_host }}"
+db_name: "{{ vault_db_name }}"
+db_port: "{{ vault_db_port }}"
+db_user: "{{ vault_db_user }}"
+db_password: "{{ vault_db_password }}"
